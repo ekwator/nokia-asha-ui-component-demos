@@ -1,0 +1,17 @@
+MIDlet-6: Category bar,/list_categorybar.png,com.nokia.example.ashauicomponentdemos.categorybar.CategoryBarExample
+MIDlet-5: Form,/list_form.png,com.nokia.example.ashauicomponentdemos.form.FormExample
+MIDlet-4: Canvas,/list_canvas.png,com.nokia.example.ashauicomponentdemos.canvas.CanvasExample
+MIDlet-3: Dialogs,/list_dialog.png,com.nokia.example.ashauicomponentdemos.dialogs.DialogExample
+MIDlet-2: Text,/list_text.png,com.nokia.example.ashauicomponentdemos.text.Text
+MIDlet-1: Lists,/list_list.png,com.nokia.example.ashauicomponentdemos.lists.ListsExample
+MIDlet-Jar-URL: AshaUIComponentDemos.jar
+Nokia-UI-Enhancement: CanvasHasBackground
+MIDlet-Icon: /miniapp.png
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: Nokia
+MIDlet-Name: Asha UI Component Demos MIDlet Suite
+MicroEdition-Profile: MIDP-2.1
+Nokia-MIDlet-App-Orientation: manual
+Nokia-MIDlet-On-Screen-Keypad: no
+MIDlet-7: Ticker,/list_ticker.png,com.nokia.example.ashauicomponentdemos.ticker.TickerExample
