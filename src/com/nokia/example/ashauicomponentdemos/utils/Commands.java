@@ -10,7 +10,6 @@ package com.nokia.example.ashauicomponentdemos.utils;
 
 import com.nokia.uihelpers.Compatibility;
 import javax.microedition.lcdui.Command;
-import javax.microedition.lcdui.Image;
 
 /**
  * A public store for commonly used Commands, to allow different parts
@@ -50,36 +49,11 @@ public class Commands {
         new Command(toFTAlert("Back"), Command.CANCEL, 1);
     public static final Command EDIT =
         new Command(toFT("Edit"), Command.SCREEN, 1);
-    public static final Command ADD_ICON;
-    public static final Command DELETE_INACTIVE_ICON;
-    public static final Command DELETE_ACTIVE_ICON;
-    public static final Command OK_INACTIVE_ICON;
-    public static final Command OK_ACTIVE_ICON;
-    public static final Command EMPTY_ICON;
+
     public static final Command OK_SCREEN =
         new Command("OK", Command.SCREEN, 2);
     public static final Command DELETE_SCREEN =
         new Command(toFT("Delete"), Command.SCREEN, 2);
-
-    static {
-        ADD_ICON = Compatibility.getCommand(
-            ImageLoader.load("/add_icon.png"), null, toFT("Add"), Command.OK, 1);
-        DELETE_INACTIVE_ICON = Compatibility.getCommand(
-            ImageLoader.load("/topbar_delete_inactive.png"), null, "",
-            Command.OK, 1);
-        DELETE_ACTIVE_ICON = Compatibility.getCommand(
-            ImageLoader.load("/topbar_delete_active.png"), null, toFT("Delete"),
-            Command.OK, 1);
-        OK_INACTIVE_ICON = Compatibility.getCommand(
-            ImageLoader.load("/topbar_tick_inactive.png"), null, "",
-            Command.OK, 1);
-        OK_ACTIVE_ICON = Compatibility.getCommand(
-            ImageLoader.load("/topbar_tick_active.png"), null, "OK",
-            Command.OK, 1);
-        EMPTY_ICON = Compatibility.getCommand(
-            Image.createRGBImage(new int[32 * 28], 32, 28, true), null, "OK",
-            Command.OK, 1);
-    }
 
     private static String toFT(String text) {
         return Compatibility.toLowerCaseIfFT(text);

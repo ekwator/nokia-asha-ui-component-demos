@@ -9,7 +9,6 @@
 package com.nokia.uihelpers;
 
 import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
-
 import java.util.Vector;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;

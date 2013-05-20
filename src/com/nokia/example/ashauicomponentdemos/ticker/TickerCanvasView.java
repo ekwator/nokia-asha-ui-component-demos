@@ -45,7 +45,7 @@ public class TickerCanvasView
         this.setTicker(ticker);
         this.setTitle(title);
 
-        ball = ImageLoader.load(ImageLoader.BALL);
+        ball = ImageLoader.load(ImageLoader.TICKER_BALL);
 
         this.addCommand(Commands.INFORMATION);
         this.setCommandListener(commandListener);

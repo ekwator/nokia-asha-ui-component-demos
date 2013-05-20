@@ -10,7 +10,6 @@
 package com.nokia.uihelpers;
 
 import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
-
 import java.util.Vector;
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.CustomItem;
@@ -26,9 +25,9 @@ public class Switch extends CustomItem {
     
     private final int MIN_CONTENT_WIDTH = 100;
     private final Image ACTIVE_IMAGE =
-            ImageLoader.load("/Checkbox.png");
+            ImageLoader.load(ImageLoader.SWITCH_ON);
     private final Image INACTIVE_IMAGE =
-            ImageLoader.load("/Checkbox_unchecked.png");
+            ImageLoader.load(ImageLoader.SWITCH_OFF);
     
     private Vector listeners;
     private boolean value;
@@ -55,7 +54,6 @@ public class Switch extends CustomItem {
         currentLabel = inactiveLabel;
         value = false;
     }
-    
     
     public boolean getValue() {
         return value;

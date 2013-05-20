@@ -9,6 +9,7 @@
 package com.nokia.uihelpers;
 
 import com.nokia.example.ashauicomponentdemos.utils.DelayedTask;
+import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
 import com.nokia.mid.ui.CategoryBar;
 import com.nokia.mid.ui.DirectGraphics;
 import com.nokia.mid.ui.DirectUtils;
@@ -1152,21 +1153,12 @@ public class CustomList
 
         public Theme() {
             if (Compatibility.hasOnekeyBack()) {
-                toggleExclusiveImage = "/toggle_disabled_asha2013.png";
-                toggleExclusiveImageSelected =
-                        "/toggle_exclusive_active_asha2013.png";
-                toggleMultipleImage = "/toggle_disabled_asha2013.png";
-                toggleMultipleImageSelected =
-                        "/toggle_multiple_active_asha2013.png";
+                toggleExclusiveImage = ImageLoader.CUSTOMLIST_TOGGLE_DISABLED;
+                toggleExclusiveImageSelected = ImageLoader.CUSTOMLIST_TOGGLE_EXCLUSIVE_ACTIVE;
+                toggleMultipleImage = ImageLoader.CUSTOMLIST_TOGGLE_DISABLED;
+                toggleMultipleImageSelected = ImageLoader.CUSTOMLIST_TOGGLE_MULTIPLE_ACTIVE;
                 selectedImageMarginRight = 15;
-            } else {
-                toggleExclusiveImage = "/toggle_disabled.png";
-                toggleExclusiveImageSelected =
-                        "/toggle_exclusive_active.png";
-                toggleMultipleImage = "/toggle_disabled.png";
-                toggleMultipleImageSelected =
-                        "/toggle_multiple_active.png";
-            }
+            } 
         }
 
         public int getBackgroundColor() {

@@ -74,8 +74,8 @@ public class CanvasExample
     public void startApp() {
         canvasList = new List(Strings.getTitle(Strings.CANVAS),
             List.IMPLICIT, DIALOG_ITEMS, null);
-        Image category1Icon = ImageLoader.load(ImageLoader.CATEGORY_1);
-        Image category2Icon = ImageLoader.load(ImageLoader.CATEGORY_2);
+        Image category1Icon = ImageLoader.load(ImageLoader.CATEGORYBAR_1);
+        Image category2Icon = ImageLoader.load(ImageLoader.CATEGORYBAR_2);
 
         IconCommand canvas1Command = new IconCommand("Canvas 1",
             category1Icon,

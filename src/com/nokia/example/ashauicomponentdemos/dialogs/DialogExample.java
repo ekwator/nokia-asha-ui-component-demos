@@ -121,9 +121,9 @@ public class DialogExample
         dialogList.addCommand(Commands.INFORMATION);
         dialogList.setFitPolicy(List.TEXT_WRAP_ON);
 
-        downloadImage = ImageLoader.load(ImageLoader.DOWNLOAD);
-        installImage = ImageLoader.load(ImageLoader.INSTALL);
-        infoImage = ImageLoader.load(ImageLoader.INFO);
+        downloadImage = ImageLoader.load(ImageLoader.DIALOG_DOWNLOAD);
+        installImage = ImageLoader.load(ImageLoader.DIALOG_INSTALL);
+        infoImage = ImageLoader.load(ImageLoader.DIALOG_INFO);
         backStack = new BackStack(this);
 
         Orientation.enableOrientations();

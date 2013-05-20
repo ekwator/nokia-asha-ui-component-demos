@@ -34,10 +34,10 @@ public class TickerExample
     extends MIDlet
     implements CategoryBarUtils.ElementListener, CommandListener {
 
-    private final int TICKER_LIST = 0;
-    private final int TICKER_CANVAS = 1;
-    private final int TICKER_TEXT = 2;
-    private final int TICKER_FORM = 3;
+    private static final int TICKER_LIST = 0;
+    private static final int TICKER_CANVAS = 1;
+    private static final int TICKER_TEXT = 2;
+    private static final int TICKER_FORM = 3;
     private final String[] DIALOG_ITEMS = 
         new String[]{
             "Ticker - list",
@@ -60,20 +60,20 @@ public class TickerExample
     public void startApp() {
         Orientation.enableOrientations();
         backStack = new BackStack(this);
-        Image listImage = ImageLoader.load(ImageLoader.CATEGORY_LIST);
-        Image canvasImage = ImageLoader.load(ImageLoader.CATEGORY_CANVAS);
-        Image textImage = ImageLoader.load(ImageLoader.CATEGORY_TEXT);
-        Image formImage = ImageLoader.load(ImageLoader.FORM);
+        Image listImage = ImageLoader.load(ImageLoader.CATEGORYBAR_LIST);
+        Image canvasImage = ImageLoader.load(ImageLoader.CATEGORYBAR_CANVAS);
+        Image textImage = ImageLoader.load(ImageLoader.CATEGORYBAR_TEXT);
+        Image formImage = ImageLoader.load(ImageLoader.CATEGORYBAR_FORM);
 
         IconCommand[] iconCommands = {
             new IconCommand(DIALOG_ITEMS[TICKER_LIST], listImage, null,
-            Command.SCREEN, 1),
+                Command.SCREEN, 1),
             new IconCommand(DIALOG_ITEMS[TICKER_CANVAS], canvasImage, null,
-            Command.SCREEN, 1),
+                Command.SCREEN, 1),
             new IconCommand(DIALOG_ITEMS[TICKER_TEXT], textImage, null,
-            Command.SCREEN, 1),
+                Command.SCREEN, 1),
             new IconCommand(DIALOG_ITEMS[TICKER_FORM], formImage, null,
-            Command.SCREEN, 1)
+                Command.SCREEN, 1)
         };
 
         categoryBar = new CategoryBar(iconCommands, true);

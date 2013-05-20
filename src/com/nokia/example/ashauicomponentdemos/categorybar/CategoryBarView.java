@@ -25,10 +25,10 @@ public class CategoryBarView
     extends Form {
 
     protected static final String[] VIEW_NAMES = {
-        "search",
-        "comments",
-        "all",
-        "contacts",
+        "downloads",
+        "pinch",
+        "slider",
+        "tap",
     };
     private int amountOfCategories;
     private int mode;
@@ -54,7 +54,7 @@ public class CategoryBarView
                 StringItem stringItem = new StringItem("", name);
                 this.append(stringItem);
             }
-            else {
+            else {           
                 setTitle(name + " actions");
             }
         }
@@ -69,29 +69,28 @@ public class CategoryBarView
         Vector commands = new Vector();
 
         if (amountOfCategories >= 1) {
-            Image search = ImageLoader.load(ImageLoader.CATEGORY_SEARCH);
+            Image search = ImageLoader.load(ImageLoader.CATEGORYBAR_DOWNLOADS);
             // Passing null as the second image makes the phone draw the selected
             // image with the current highlight color
-            commands.addElement(new IconCommand("search", search, null,
+            commands.addElement(new IconCommand("downloads", search, null,
                 Command.SCREEN, 1));
         }
         if (amountOfCategories >= 2) {
-            Image comments = ImageLoader.load(ImageLoader.CATEGORY_COMMENTS);
+            Image comments = ImageLoader.load(ImageLoader.CATEGORYBAR_PINCH);
  
-            commands.addElement(new IconCommand("comments", comments, null,
+            commands.addElement(new IconCommand("pinch", comments, null,
                 Command.SCREEN, 1));
         }
         if (amountOfCategories >= 3) {
-            Image allExtend = ImageLoader.load(ImageLoader.CATEGORY_ALL);
+            Image allExtend = ImageLoader.load(ImageLoader.CATEGORYBAR_SLIDER);
  
-            commands.addElement(new IconCommand("all", allExtend, null,
+            commands.addElement(new IconCommand("slider", allExtend, null,
                 Command.SCREEN, 1));
         }
         if (amountOfCategories == 4) {
-            Image contactsExtend = ImageLoader.load(
-                ImageLoader.CATEGORY_CONTACTS);
+            Image contactsExtend = ImageLoader.load(ImageLoader.CATEGORYBAR_TAP);
 
-            commands.addElement(new IconCommand("contacts", contactsExtend, null,
+            commands.addElement(new IconCommand("tap", contactsExtend, null,
                 Command.SCREEN, 1));
        }
 
