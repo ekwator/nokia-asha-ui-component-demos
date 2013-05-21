@@ -106,8 +106,8 @@ public class ImageLoader {
     public static final String LIST_SLIDER = "/list_slider.png";
     public static final String LIST_TUMBLER = "/list_tumbler.png";
     public static final String LIST_TEXT_INPUT = "/list_input.png";
-    public static final String LIST_EXCLUSIVE_SELECT = "/legacy_form_exclusive.png";
-    public static final String LIST_MULTIPLE_SELECT = "/legacy_form_multiple.png";
+    public static final String LIST_EXCLUSIVE_SELECT = "/list_exclusive.png";
+    public static final String LIST_MULTIPLE_SELECT = "/list_multiple.png";
     public static final String LIST_TEXT_ITEM = "/list_text.png";
     public static final String LIST_IMAGE = "/list_image.png";
     public static final String LIST_SPACER = "/list_spacer.png";
