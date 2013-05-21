@@ -136,12 +136,12 @@ public class Slider extends CustomItem {
         g.fillRect(MARGIN, (int) h / 2 - BACKGROUND_HEIGHT / 2, w - MARGIN * 2, BACKGROUND_HEIGHT);
         
         // Calculate handle position based on the value: 0% = left, 100% = right
-        int currentX = minX + (int) ((float) value / (maxValue - minValue) * (maxX - minX));
+        int currentX = minX + (int) ((float) (value - 1) / (maxValue - minValue) * (maxX - minX));
         g.setColor(0x00ff00);
         g.drawImage(SLIDER_HANDLE, 
-                    currentX - HANDLE_SIZE / 2,
-                    (int) h / 2 - HANDLE_SIZE / 2,
-                    Graphics.TOP | Graphics.HCENTER);
+                    currentX,
+                    (int) h / 2,
+                    Graphics.VCENTER | Graphics.HCENTER);
     }
     
     protected int getMinContentWidth() {
