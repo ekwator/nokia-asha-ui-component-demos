@@ -260,7 +260,7 @@ public class GridLayout
         }
         
         final int rowCount = (int) Math.ceil((double) gridItems.size() / columnCount);
-        setPreferredSize(width, rowCount * rowHeight);
+        setPreferredSize(width, rowCount * rowHeight + CUSTOM_ITEM_MARGIN_SIZE * 2);
         repaint();
     }
        
