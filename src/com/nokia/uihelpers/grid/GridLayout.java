@@ -32,6 +32,7 @@ public class GridLayout
     private int width = 0;
     private int columnCount = DEFAULT_COLUMN_COUNT;
     private int columnWidth = 0;
+    private int rowCount = 0;
     private int rowHeight = 0;
     private int lastX = 0;
     private int lastY = 0;
@@ -75,8 +76,6 @@ public class GridLayout
      * @param width The new width for the layout.
      */
     public void setColumnCountAndWidth(final int columnCount, final int width) {
-        System.out.println("GridLayout::setColumnCountAndWidth(): " + columnCount + ", " + width);
-        
         if ((this.width != width && columnCount > 0)
             || (columnCount > 0 && this.columnCount != columnCount))
         {
@@ -190,14 +189,14 @@ public class GridLayout
      * @see javax.microedition.lcdui.CustomItem#getPrefContentHeight(int)
      */
     protected int getPrefContentHeight(int h) {
-        return getPreferredHeight();
+        return rowCount * rowHeight;
     }
 
     /**
      * @see javax.microedition.lcdui.CustomItem#getPrefContentWidth(int)
      */
     protected int getPrefContentWidth(int w) {
-        return getPreferredWidth();
+        return columnCount * columnWidth;
     }
 
     /**
@@ -259,7 +258,7 @@ public class GridLayout
             ((GridItem)e.nextElement()).setSize(columnWidth, rowHeight);
         }
         
-        final int rowCount = (int) Math.ceil((double) gridItems.size() / columnCount);
+        rowCount = (int) Math.ceil((double) gridItems.size() / columnCount);
         setPreferredSize(width, rowCount * rowHeight + CUSTOM_ITEM_MARGIN_SIZE * 2);
         repaint();
     }
