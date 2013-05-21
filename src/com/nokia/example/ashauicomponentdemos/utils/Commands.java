@@ -26,8 +26,7 @@ public class Commands {
     public static final Command EXIT =
         new Command(toFT("Back"), Command.EXIT, 1);
     public static final Command INFORMATION =
-        new Command(Compatibility.isFullTouch() ? "information"
-        : "Info", toFT("Information"), Command.SCREEN, 3);
+        new Command(toFT("Information"), Command.SCREEN, 3);
     public static final Command INFORMATION_BACK =
         new Command(toFT("Back"), Command.BACK, 1);
     public static final Command OK = new Command("OK", Command.OK, 1);
