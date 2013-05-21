@@ -13,6 +13,7 @@ import com.nokia.example.ashauicomponentdemos.utils.Commands;
 import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
 import com.nokia.example.ashauicomponentdemos.utils.InformationView;
 import com.nokia.example.ashauicomponentdemos.utils.Strings;
+import com.nokia.uihelpers.Compatibility;
 import com.nokia.uihelpers.orientation.Orientation;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -104,9 +105,12 @@ public class DialogExample
     private Timer timer;
 
     // Screen commands to showcase the correct order of commands in UX perspective.
-    private final Command screenOkCommand = new Command("OK", Command.SCREEN, 3);
-    private final Command screenHelpCommand = new Command("HELP", Command.SCREEN, 2);
-    private final Command screenCancelCommand = new Command("CANCEL", Command.SCREEN, 1);
+    private final Command screenOkCommand = new Command(
+            Compatibility.toUpperCaseIfFT("OK"), Command.SCREEN, 3);
+    private final Command screenHelpCommand = new Command(
+            Compatibility.toUpperCaseIfFT("Help"), Command.SCREEN, 2);
+    private final Command screenCancelCommand = new Command(
+            Compatibility.toUpperCaseIfFT("Cancel"), Command.SCREEN, 1);
 
     /**
      * Start the app, create and show the initial List view,

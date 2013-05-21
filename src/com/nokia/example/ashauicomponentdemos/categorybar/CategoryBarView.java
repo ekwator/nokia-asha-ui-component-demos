@@ -25,16 +25,16 @@ public class CategoryBarView
     extends Form {
 
     protected static final String[] VIEW_NAMES = {
-        "downloads",
-        "pinch",
-        "slider",
-        "tap",
+        "Downloads",
+        "Pinch",
+        "Slider",
+        "Tap",
     };
     private int amountOfCategories;
     private int mode;
 
     public CategoryBarView(int amountOfCategories, int mode) {
-        super("search");
+        super("Search");
 
         this.amountOfCategories = amountOfCategories;
         this.mode = mode;

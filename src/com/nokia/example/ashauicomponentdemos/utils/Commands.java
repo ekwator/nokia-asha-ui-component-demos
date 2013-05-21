@@ -59,6 +59,6 @@ public class Commands {
     }
 
     private static String toFTAlert(String text) {
-        return Compatibility.isFullTouch() ? text.toUpperCase() : text;
+        return Compatibility.toUpperCaseIfFT(text);
     }
 }

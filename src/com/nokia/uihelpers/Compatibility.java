@@ -212,6 +212,10 @@ public final class Compatibility {
     public static String toLowerCaseIfFT(String text) {
         return (isFullTouch() && !hasOnekeyBack()) ? text.toLowerCase() : text;
     }
+    
+    public static String toUpperCaseIfFT(String text) {
+        return (isFullTouch() && !hasOnekeyBack()) ? text.toUpperCase() : text;
+    }    
 
     public static String[] toLowerCaseIfFT(String[] texts) {
         for (int i = 0; i < texts.length; i++) {
