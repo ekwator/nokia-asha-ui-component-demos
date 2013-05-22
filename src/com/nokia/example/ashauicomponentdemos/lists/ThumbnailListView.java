@@ -12,7 +12,7 @@ package com.nokia.example.ashauicomponentdemos.lists;
 import com.nokia.example.ashauicomponentdemos.utils.BackStack;
 import com.nokia.example.ashauicomponentdemos.utils.Commands;
 import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
-import com.nokia.uihelpers.Compatibility;
+
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
@@ -32,7 +32,7 @@ public class ThumbnailListView
     private BackStack backStack;
     
     public ThumbnailListView(MIDlet parent, CommandListener commandListener) {
-        super(Compatibility.toLowerCaseIfFT("Thumbnails"), List.IMPLICIT);
+        super("Thumbnails", List.IMPLICIT);
         
         for (int i = 0; i < MAX_ITEMS; i++) {
             this.append("List item "

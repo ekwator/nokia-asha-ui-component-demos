@@ -211,13 +211,12 @@ public class CustomList
      */
     protected void showNotify() {
         super.showNotify();
-        if (Compatibility.hasGestureSupport()) {
-            if (!SafeGestureRegistrationManager.register(this, zone)) {
-                throw new RuntimeException(
+
+        if (!SafeGestureRegistrationManager.register(this, zone)) {
+            throw new RuntimeException(
                     "GestureRegistrationManager.register() failed!");
-            }
-            SafeGestureRegistrationManager.setListener(this, this);
         }
+        SafeGestureRegistrationManager.setListener(this, this);
         startScrollingAnimation(0);
     }
 
@@ -226,9 +225,7 @@ public class CustomList
      */
     protected void hideNotify() {
         super.hideNotify();
-        if (Compatibility.hasGestureSupport()) {
-            SafeGestureRegistrationManager.unregister(this, zone);
-        }
+        SafeGestureRegistrationManager.unregister(this, zone);
         stopScrollAnimation();
     }
 
@@ -1077,33 +1074,10 @@ public class CustomList
      */
     public static Theme createTheme(Display display) {
         Theme theme = new CustomList.Theme();
-        if (!Compatibility.supportsIconCommands()) {
-            theme.setDrawBackground(false);
-            theme.setElementMinHeight(44);
-            theme.setBackgroundMarginTopAndBottom(0);
-            theme.setTextOnlyMarginLeft(5);
-            theme.setImageMarginLeft(1);
-            theme.setTextMarginLeftAndRight(5);
-            theme.setSelectedImageMarginRight(0);
-            theme.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN,
+        theme.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN,
                 Font.SIZE_MEDIUM));
-            theme.setScrollBarMarginRight(0);
-            theme.setScrollBarWidth(6);
-            theme.setScrollBarArc(3);
-            theme.setScrollBarMarginTopAndBottom(0);
-            theme.setBorderType(Theme.BORDER_TOUCH_AND_TYPE);
-            theme.setBorderColorLight(0x20ffffff);
-            theme.setBorderColorDark(0x16000000);
-            theme.setScrollBarColor(display.getColor(Display.COLOR_FOREGROUND));
-            theme.setHideScrollBar(false);
-            theme.setUseRubberBandEffect(false);
-        }
-        if (Compatibility.hasOnekeyBack()) {
-            theme.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN,
-                Font.SIZE_MEDIUM));
-            theme.setTextOnlyMarginLeft(36);
-            theme.setElementMinHeight(36);
-        }
+        theme.setTextOnlyMarginLeft(36);
+        theme.setElementMinHeight(36);
         theme.setBackgroundColor(display.getColor(Display.COLOR_BACKGROUND));
         theme.setBackgroundColorFocused(display.getColor(
             Display.COLOR_HIGHLIGHTED_BACKGROUND));
@@ -1152,13 +1126,11 @@ public class CustomList
         protected String toggleMultipleImageSelected;
 
         public Theme() {
-            if (Compatibility.hasOnekeyBack()) {
-                toggleExclusiveImage = ImageLoader.CUSTOMLIST_TOGGLE_DISABLED;
-                toggleExclusiveImageSelected = ImageLoader.CUSTOMLIST_TOGGLE_EXCLUSIVE_ACTIVE;
-                toggleMultipleImage = ImageLoader.CUSTOMLIST_TOGGLE_DISABLED;
-                toggleMultipleImageSelected = ImageLoader.CUSTOMLIST_TOGGLE_MULTIPLE_ACTIVE;
-                selectedImageMarginRight = 15;
-            } 
+            toggleExclusiveImage = ImageLoader.CUSTOMLIST_TOGGLE_DISABLED;
+            toggleExclusiveImageSelected = ImageLoader.CUSTOMLIST_TOGGLE_EXCLUSIVE_ACTIVE;
+            toggleMultipleImage = ImageLoader.CUSTOMLIST_TOGGLE_DISABLED;
+            toggleMultipleImageSelected = ImageLoader.CUSTOMLIST_TOGGLE_MULTIPLE_ACTIVE;
+            selectedImageMarginRight = 15;
         }
 
         public int getBackgroundColor() {

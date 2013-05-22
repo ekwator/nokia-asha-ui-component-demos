@@ -8,7 +8,7 @@
 */
 package com.nokia.example.ashauicomponentdemos.utils;
 
-import com.nokia.uihelpers.Compatibility;
+
 
 /**
  * Titles of the example MIDlets
@@ -49,6 +49,6 @@ public class Strings {
     };
 
     public static String getTitle(int index) {
-        return Compatibility.toLowerCaseIfFT(TITLES[index]);
+        return TITLES[index];
     }
 }

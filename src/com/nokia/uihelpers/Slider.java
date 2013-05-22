@@ -129,7 +129,7 @@ public class Slider extends CustomItem {
         // Draw the strings: current, min and max values
         g.setColor(0x666666);
         g.setFont(Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL));
-        g.drawString(Compatibility.toLowerCaseIfFT("Value is ") + (value), valueStrX, valueStrY, Graphics.TOP | Graphics.RIGHT);
+        g.drawString("Value is " + (value), valueStrX, valueStrY, Graphics.TOP | Graphics.RIGHT);
         g.drawString(String.valueOf(minValue), 0, h, Graphics.BOTTOM | Graphics.LEFT);
         g.drawString(String.valueOf(maxValue), w, h, Graphics.BOTTOM | Graphics.RIGHT);
         
@@ -178,14 +178,5 @@ public class Slider extends CustomItem {
         }
         repaint();
     }
-    
-    protected boolean traverse(int dir,
-            int viewportWidth,
-            int viewportHeight,
-            int[] visRect_inout) {
-        if (Compatibility.isNonTouch()) {
-            return false;
-        }
-        return true;
-    }
+
 }

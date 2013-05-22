@@ -8,7 +8,7 @@
 */
 package com.nokia.example.ashauicomponentdemos.utils;
 
-import com.nokia.uihelpers.Compatibility;
+
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.CommandListener;
 
@@ -19,16 +19,11 @@ public class SaveChangesAlert
     extends Alert {
 
     public SaveChangesAlert(CommandListener listener) {
-        super(Compatibility.toLowerCaseIfFT("Save changes"));
+        super("Save changes");
         setString("Save changes made?");
         addCommand(Commands.ALERT_SAVE_YES);
         addCommand(Commands.ALERT_SAVE_NO);
-        if (!Compatibility.hasOnekeyBack()) {
-            addCommand(Commands.ALERT_SAVE_BACK);
-        }
-        else {
-            addCommand(Commands.BACK);
-        }
+        addCommand(Commands.BACK);
         setTimeout(Alert.FOREVER);
         setCommandListener(listener);
     }

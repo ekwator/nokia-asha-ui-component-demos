@@ -11,7 +11,7 @@ package com.nokia.example.ashauicomponentdemos.lists;
 
 import com.nokia.example.ashauicomponentdemos.utils.BackStack;
 import com.nokia.example.ashauicomponentdemos.utils.Commands;
-import com.nokia.uihelpers.Compatibility;
+
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
@@ -39,7 +39,7 @@ public class TruncatedListView
     private BackStack backStack;
     
     public TruncatedListView(MIDlet parent, CommandListener commandListener) {
-        super(Compatibility.toLowerCaseIfFT("Truncated"),
+        super("Truncated",
               List.IMPLICIT,
               LONG_ITEMS,
               null);

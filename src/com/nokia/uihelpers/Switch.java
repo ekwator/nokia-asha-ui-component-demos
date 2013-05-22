@@ -84,7 +84,7 @@ public class Switch extends CustomItem {
         g.setColor(0x666666);
         Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
         g.setFont(font);
-        g.drawString(Compatibility.toLowerCaseIfFT(currentLabel), 0,
+        g.drawString(currentLabel, 0,
                      h / 2 - font.getHeight() / 2, Graphics.TOP | Graphics.LEFT);
         
         g.drawImage(value ? ACTIVE_IMAGE : INACTIVE_IMAGE, 
