@@ -87,4 +87,5 @@ Asha SDK 1.0.
 
 VERSION HISTORY
 
-1.0 Initial release.
+1.0.1 Updated icons
+1.0   Initial release.
