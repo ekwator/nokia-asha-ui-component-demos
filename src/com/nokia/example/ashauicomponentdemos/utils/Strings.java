@@ -22,14 +22,7 @@ public class Strings {
     public static final int FORM = 4;
     public static final int CATEGORYBAR = 5;
     public static final int TICKER = 6;
-    public static final int CONFIRMATION = 7;
-    public static final int EMPTYCONTENT = 8;
-    public static final int MULTIPLEITEMS = 9;
-    public static final int ZOOM = 10;
-    public static final int ADDNEW = 11;
-    public static final int INTERDEPENDENT = 12;
-    public static final int KEYPADS = 13;
-    public static final int MENUS = 14;
+    public static final int MENUS = 7;
     private static final String[] TITLES = {
         "Lists",
         "Text",
@@ -38,13 +31,6 @@ public class Strings {
         "Form",
         "Categories",
         "Ticker",
-        "Confirmation",
-        "Empty content",
-        "Multiple items",
-        "Zoom",
-        "Add new",
-        "Interdependent",
-        "Keypads",
         "Menus"
     };
 

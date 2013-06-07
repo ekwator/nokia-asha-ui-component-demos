@@ -52,8 +52,19 @@ public class GridLayout
      */
     public void addItem(GridItem gridItem) {
         gridItems.addElement(gridItem);
+        onWidthOrColumnCountChanged();
         repaint();
     }
+    
+    /**
+     * Removes an item from the grid.
+     * @param gridItem The item to remove.
+     */
+    public void removeItem(GridItem gridItem) {
+        gridItems.removeElement(gridItem);
+        onWidthOrColumnCountChanged();
+        repaint();
+    }    
 
     /**
      * Removes all the items from the layout.

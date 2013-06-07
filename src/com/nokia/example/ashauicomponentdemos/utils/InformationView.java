@@ -175,147 +175,20 @@ public class InformationView
         + "\n- form"
         + "\n\nThe ticker appears as part of the chrome, and does not scroll away with the content."
         + "\n\nFor more information on tickers, please see the Nokia Asha design guidelines.",
-        
-        // CONFIRMATION
-        "Confirmation patterns are necessary, especially if the user might "
-        + "lose data by accident. In the Series 40 UI interaction style, "
-        + "this can happen with use of the back button. The set action for "
-        + "the back button is “cancel and discard�? all changes. This may "
-        + "cause difficulties, especially for people who are new to the "
-        + "platform. To ensure that they do not discard previously made "
-        + "changes, it is necessary to have a query following the back "
-        + "command. The query must have at least 2 choices: YES/NO. In "
-        + "addition, it is possible to add a help option to the query. "
-        + "Please also check the other dialog layouts that are possible. "
-        + "\n\nOn the other hand, there is no need for an additional "
-        + "confirmation query if the user accepts changes that were made "
-        + "in a form, via the tick mark in action button #1."
-        + "\n\nFor more information on confirmation patterns, please see "
-        + "the Series 40 full touch style guide.",
-        
-        // NO CONTENT
-        "It is important to indicate to people if there is no content. "
-        + "This will prevent people from perceiving your application as "
-        + "broken or unresponsive. It may also help the out-of-box "
-        + "experience of your application if people either have sample "
-        + "content or a very obvious explanation of how to add their first "
-        + "content."
-        + "\n\nThis mini app shows 3 different variations:"
-        + "\n\n- an indication of \'no content\' but no further action"
-        + "\n\n- an add button in the content area, which disappears "
-        + "after the first content is added"
-        + "\n\n- an add button as action button #1, and a textual hint "
-        + "informing the user that they should use this button to create "
-        + "their first content"
-        + "\n\nFor more information on empty content, please see the "
-        + "Series 40 full touch style guide.",
-        
-        // MULTIPLE ITEMS
-        "The multiple items patterns show how to handle the selection of multiple "
-        + "items in case there is:" 
-        + "\n\n- a positive selection, like adding multiple images to an e-mail,"
-        + "\n\n- a negative selection, like deleting multiple items permanently from the "
-        + "phone."
-
-        + "\n\nIn a positive selection, the indicator for selecting an item is a white "
-        + "checkmark on top of a green squircle. Action button 1 is filled with a "
-        + "checkmark. The checkmark is greyed out in case no selection has been made. "
-        + "Pressing the active checkmark in action button 1 does not evoke any "
-        + "additional confirmation query, since the selection does not cause any "
-        + "final loss. The user can undo the step easily, just by removing the "
-        + "files from the list of attached files."
-
-        + "\n\nThe negative selection, in contrast, could display a designated icon in "
-        + "action button 1 showing the action being performed – for example a trash "
-        + "bin icon in case of deleting the items. The item marker could be a white "
-        + "cross on a red squircle. This clearly indicates that this item will be "
-        + "deleted when the action button 1 is tapped. Both metaphors imply a negative "
-        + "connotation. When deleting an item permanently, the application should show "
-        + "a confirmation query after action button 1 is pressed. This prevents the "
-        + "user from losing important items just because of a badly performed gesture. "
-        + "Action button 1 is dimmed as long as there is no selection made, i.e. "
-        + "no item is marked."
-        + "\nHowever, both patterns require a confirmation query in case the user "
-        + "presses back. The query is always positively formulated, i.e. do you want "
-        + "to perform this action? NO – YES – BACK.",
-
-        
-        // ZOOMING
-        "Zooming can be done in various ways. This mini app demonstrates "
-        + "three common ways:"
-        + "\n\n- pinch zoom, for zooming in and zooming out"
-        + "\n\n- slider zoom, where a separate slider component is used"
-        + "\n\n- tap zoom – double tapping toggles between maximum (2) "
-        + "zoom factor and normal (1) zoom factor"
-        + "\n\nThe image can be panned in any of the cases."
-        + "\n\nFor more information on zoom, please see the Series 40 "
-        + "full touch style guide.",
-        
-        // ADD NEW
-        "This pattern demonstrates how to add new items to a form. The button "
-        + "at the bottom of the form adds a new item. It is not possible to dim "
-        + "an item and make it become active later. The entire form is saved by "
-        + "pressing the checkmark in action button 1, or via back button and "
-        + "the related confirmation query. The query is always positively "
-        + "formulated, i.e. do you want to perform this action? NO – YES – BACK.",
-        
-        // INTERDEPENDENT
-        "This pattern shows how to overcome the fact that it is not "
-        + "possible to dim items. The example demonstrates three "
-        + "interdependent popup choicegroups. The selection of the "
-        + "choicegroup defines the content of the next choicegroup. "
-        + "Popup choicegroup is well suited for this task, since it "
-        + "does not change too much of the visible content in case there "
-        + "is a change in a previous item. Besides, the closed choicegroup "
-        + "allows the user to glance the entire selection."
-        + "The Done button is only shown in case the user has made a "
-        + "selection from the last popup choicegroup. The StringItem "
-        + "button is more visible than the icon in action button one (in "
-        + "case the StringItem is always shown above the fold) and might "
-        + "ease the selection task. "
-
-        + "\n\nA real-life task could be the selection of town:"
-        + "\n- Continent"
-        + "\n- Country"
-        + "\n- (Optional state)"
-        + "\n- Town"
-
-        + "\n\nThis would avoid any virtual keyboard use and might be an "
-        + "alternative to a text-input based search.",
-        
-        // KEYPADS
-        "This application demonstrates the different keypad layouts available "
-        + "in Series 40. There are:"
-        + "\n\n- normal – standard layout"
-        + "\n- initial caps sentence"
-        + "\n- initial caps word"
-        + "\n- password – hides letters with an asterisk *"
-        + "\n- sensitive"
-        + "\n- email – all lower case and @"
-        + "\n- url – all lower case"
-        + "\n- phone number – numbers and #, + "
-        + "\n- decimal – numbers and ."
-        + "\n- numeric – numbers only"
-        + "\n\nIt is highly recommended to choose the correct keypad layout "
-        + "for each text input field, not only in full touch phones but also "
-        + "in touch and type and non-touch phones.",
+       
         
         // MENUS
-        "In touch phones, there are 2 different kinds of menus available: "
-        + "\n\n- Options menu, containing commands which act on the entire "
-        + "view or which navigate the user to a new view without any item "
-        + "being selected."
-        + "\n\n- Item specific menu, containing only commands which act on a "
-        + "particular item. "
-        + "\n\nOptions menu is accessed via the options menu icon, whereas the "
-        + "item specific menu is opened via a long press on the particular "
-        + "item. "
-        + "\n\nIn non-touch phones, these 2 menus are merged into the options "
-        + "menu. This is possible due to the focus. The Options menu may "
-        + "contain view related commands and item specific commands which act "
-        + "only on the item which has the focus."
-        + "\n\nIn case the options menu is empty, the icon is dimmed in full "
-        + "touch and left empty in touch and type or non-touch phones."
+        "This application demonstrates options menu and context menus. \n\n"
+        + "Options menu is created by adding Commands to a Form. The highest "
+        + "priority Command will be displayed as a button while the "
+        + "lower priority Commands will be available in the menu.\n\n"
+        + "You can create a context menu in two different ways, "
+        + "\n\n- By adding Commands to a Form Item. The Commands are displayed in "
+        + "a popup menu when long-pressing the Item."
+        + "\n\n- By creating and showing a PopupList component. This is useful "
+        + "when you need to explicitly control when to show/hide the menu. "
+        + "You can use PopupList e.g. for showing context menu for a selection on a "
+        + "Canvas."
     };
 
     public InformationView(int item, CommandListener commandListener) {

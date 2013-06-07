@@ -71,7 +71,7 @@ public class ExampleCanvas
         int h = getHeight();
         int textY = this.getHeight() / 4;
         int backHintY = this.getHeight() / 2;
-        g.setColor(255, 255, 255); // white
+        g.setColor(0xf4f4f4); // white
         g.fillRect(0, 0, w, h);
 
         // Draw the text
