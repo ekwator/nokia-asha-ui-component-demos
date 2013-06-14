@@ -9,16 +9,19 @@
 
 package com.nokia.example.ashauicomponentdemos.lists;
 
-import com.nokia.example.ashauicomponentdemos.utils.BackStack;
 import com.nokia.example.ashauicomponentdemos.utils.Commands;
 import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
-import com.nokia.uihelpers.CustomList;
+import com.nokia.uihelpers.CustomListItem;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.List;
+import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.ItemStateListener;
 import javax.microedition.midlet.MIDlet;
 
 /**
@@ -26,74 +29,92 @@ import javax.microedition.midlet.MIDlet;
  * is persisted using record management store (RMS).
  */
 public class FancyListView
-    extends FancyCustomList
-    implements CommandListener {
+    extends Form
+    implements CommandListener, ItemStateListener {
     
     private final int MAX_ITEMS = 10;
+    private MIDlet parent;
     private CommandListener parentCommandListener;
-    private BackStack backStack;
     
     public FancyListView(MIDlet parent, CommandListener commandListener) {
         super("Fancy");
-        this.setTheme(CustomList.createTheme(Display.getDisplay(parent)));
         
+        this.parent = parent;
         int itemIndex = 1;
         for (int i = 0; i < MAX_ITEMS; i++) {
             if (i % 7 == 6) {
-                this.appendSeparator();
+                append(new Separator());
             } else {
-                this.append(
-                    "Title " + (itemIndex),
-                    "Content " + (itemIndex),
-                    "12:34",
-                    ImageLoader.loadThumbnail(i),
-                    i % (FancyElement.IMPORTANCE_HIGH + 1)
-                );
+                append(
+                        new FancyListItem(
+                        "Title " + (itemIndex),
+                        "Content " + (itemIndex),
+                        "12:34",
+                        ImageLoader.loadThumbnail(i),
+                        i % (FancyListItem.IMPORTANCE_HIGH + 1)));
                 itemIndex++;
             }
         }
         
-        this.setFitPolicy(List.TEXT_WRAP_DEFAULT);
-        this.setSelectCommand(Commands.LIST_SELECT);
         this.addCommand(Commands.BACK);
         this.setCommandListener(this);
         parentCommandListener = commandListener;
-        backStack = new BackStack(parent);
+        
+        this.setItemStateListener(this);
     }
 
-    public void commandAction(Command c, Displayable d) {
-        if (c == Commands.BACK) {
-            if (d instanceof Alert) {
-                backStack.back();
-            }
-            else {
-                parentCommandListener.commandAction(c, d);
-            }
-        }
-        else if (c == Commands.LIST_SELECT) {
-            int selected = getSelectedIndex();
-            if (selected < 6) {
-                selected++;
-            }
+    public void itemStateChanged(Item item) {
+        if (item instanceof CustomListItem) {
+            String text = ((CustomListItem)item).getText();          
             Alert selectedAlert = new Alert("Selected");
             selectedAlert.setString(
-                    "List item " +
-                    (selected) +
+                    text +
                     " selected.");
             selectedAlert.addCommand(Commands.ALERT_CONTINUE);
             selectedAlert.addCommand(Commands.BACK);
             selectedAlert.setTimeout(Alert.FOREVER);
             selectedAlert.setCommandListener(this);
-            backStack.forward(selectedAlert);
-        }
-        else if (c == Commands.ALERT_CONTINUE) {
-            // First get out from the Alert
-            backStack.back();
-            // Then get out of this example back to the main List view
-            parentCommandListener.commandAction(Commands.BACK, d);
-        }
-        else {
-            parentCommandListener.commandAction(c, d);
+            Display.getDisplay(parent).setCurrent(selectedAlert);
         }
     }
+
+    public void commandAction(Command c, Displayable d) {
+        if (c.getCommandType() == Command.BACK) {
+            parentCommandListener.commandAction(c, d);
+        }
+        else if (c == Commands.ALERT_CONTINUE) {
+            // Handle alert continue command as Back command
+            parentCommandListener.commandAction(Commands.BACK, d);
+        }
+    }
+    
+    private class Separator extends CustomItem {
+
+        public Separator() {
+            super("");
+        }
+        
+        protected int getMinContentWidth() {
+            return 0;
+        }
+
+        protected int getMinContentHeight() {
+            return 1;
+        }
+
+        protected int getPrefContentWidth(int height) {
+            return FancyListView.this.getWidth();
+        }
+
+        protected int getPrefContentHeight(int width) {
+            return 1;
+        }
+
+        protected void paint(Graphics g, int w, int h) {
+            g.setColor(0x000000);
+            g.drawLine(w / 6, 0, w - w / 6, 0);
+        }
+    
+    }
+    
 }

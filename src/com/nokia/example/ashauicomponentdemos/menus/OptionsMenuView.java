@@ -4,7 +4,6 @@ import com.nokia.example.ashauicomponentdemos.utils.Commands;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Form;
-import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.StringItem;
 import javax.microedition.midlet.MIDlet;
 

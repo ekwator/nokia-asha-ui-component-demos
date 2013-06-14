@@ -11,13 +11,11 @@ package com.nokia.example.ashauicomponentdemos.ticker;
 import com.nokia.example.ashauicomponentdemos.utils.Commands;
 import com.nokia.example.ashauicomponentdemos.utils.ImageLoader;
 
-import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.Item;
-import javax.microedition.lcdui.StringItem;
 import javax.microedition.lcdui.Ticker;
 
 /**

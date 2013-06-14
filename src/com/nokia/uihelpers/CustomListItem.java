@@ -1,41 +1,35 @@
 package com.nokia.uihelpers;
 
-import com.nokia.mid.ui.PopupList;
-import com.nokia.mid.ui.PopupListItem;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Vector;
-import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 public class CustomListItem extends CustomItem {
     
-    private static final int MARGIN_LEFT = 10;
-    private static final int ITEM_HEIGHT = 30;
+    protected static final int MARGIN_LEFT = 5;
+    protected static final int ITEM_HEIGHT = 30;
     private static final int SCROLL_THRESHOLD = 3;
-    private static final int FOREGROUND_COLOR = 0x484848;
-    private static final int HIGHLIGHT_COLOR = 0xe1e1e1;
+    protected static final int FOREGROUND_COLOR = 0x484848;
+    protected static final int HIGHLIGHT_COLOR = 0xe1e1e1;
     
-    private String text;    
-    private Image image;
+    protected String label;    
+    protected Image image;
     
-    private boolean pressed;
+    protected boolean pressed;
     private int dragCounter;
     
-    public CustomListItem(String text, Image image) {
+    public CustomListItem(String label, Image image) {
         super(null);
-        this.text = text;
+        this.label = label;
         this.image = image;
     }
 
     public String getText() {
-        return text;
+        return label;
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.label = text;
     }
 
     public Image getImage() {
@@ -69,8 +63,11 @@ public class CustomListItem extends CustomItem {
     }
     
     public void pointerReleased(int x, int y) {
+        if (pressed) {
+            notifyStateChanged();
+        }
         pressed = false; 
-        repaint();
+        repaint();        
     }
     
     public void pointerDragged(int x, int y) {
@@ -82,18 +79,23 @@ public class CustomListItem extends CustomItem {
     }
     
     protected void paint(Graphics g, int w, int h) {
-        
         if (pressed) {
             g.setColor(HIGHLIGHT_COLOR);
             g.fillRect(0, 0, w, h);
         }
-        if (text != null) {
+        if (label != null) {
             g.setColor(FOREGROUND_COLOR);
-            g.drawString(text,
-                    MARGIN_LEFT,
+            g.drawString(label,
+                    MARGIN_LEFT * 2,
                     h / 2 - g.getFont().getHeight() / 2,
                     Graphics.TOP | Graphics.LEFT);
         }
     }
+    
+    public void traverseOut() {
+        pressed = false;
+        repaint();
+        super.traverseOut();
+    }    
     
 }

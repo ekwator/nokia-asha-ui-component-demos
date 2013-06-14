@@ -1,11 +1,11 @@
 /**
-* Copyright (c) 2012-2013 Nokia Corporation. All rights reserved.
-* Nokia and Nokia Connecting People are registered trademarks of Nokia Corporation. 
-* Oracle and Java are trademarks or registered trademarks of Oracle and/or its
-* affiliates. Other product and company names mentioned herein may be trademarks
-* or trade names of their respective owners. 
-* See LICENSE.TXT for license information.
-*/
+ * Copyright (c) 2012-2013 Nokia Corporation. All rights reserved. Nokia and
+ * Nokia Connecting People are registered trademarks of Nokia Corporation.
+ * Oracle and Java are trademarks or registered trademarks of Oracle and/or its
+ * affiliates. Other product and company names mentioned herein may be
+ * trademarks or trade names of their respective owners. See LICENSE.TXT for
+ * license information.
+ */
 package com.nokia.example.ashauicomponentdemos.lists;
 
 import com.nokia.example.ashauicomponentdemos.utils.BackStack;
@@ -25,40 +25,35 @@ import javax.microedition.midlet.MIDletStateChangeException;
  * This example demonstrates the usage of the List class
  */
 public class ListsExample
-    extends MIDlet
-    implements CommandListener {
+        extends MIDlet
+        implements CommandListener {
 
     private static final int IMPLICIT_LIST = 0;
     private static final int EXCLUSIVE_CONFIRM_LIST = 1;
     private static final int MULTIPLE_LIST = 2;
     private static final int TRUNCATED_LIST = 3;
     private static final int THUMBNAILS_LIST = 4;
-    private static final int POPUP_LIST = 5;
-    private static final int FANCY_LIST = 6;
-    private static final int GRID_LIST = 7;
-
+    private static final int FANCY_LIST = 5;
+    private static final int GRID_LIST = 6;
     private static final String[] LIST_ITEMS = {
         "Implicit",
         "Exclusive + confirm",
         "Multiple",
         "Truncated",
         "Thumbnails",
-        "Popup",        
         "Fancy list",
         "Grid list"
     };
-
     private List list;
     private BackStack backStack;
     private int listType;
-    
+
     /**
      * Start the app, create and display the initial list view
      */
     public void startApp() {
-        list =
-            new List(Strings.getTitle(Strings.LISTS), List.IMPLICIT,
-            LIST_ITEMS, null);
+        list = new List(Strings.getTitle(Strings.LISTS), List.IMPLICIT,
+                LIST_ITEMS, null);
         list.setSelectCommand(List.SELECT_COMMAND);
         list.addCommand(Commands.INFORMATION);
         list.addCommand(Commands.BACK);
@@ -74,7 +69,7 @@ public class ListsExample
     }
 
     public void destroyApp(boolean a)
-        throws MIDletStateChangeException {
+            throws MIDletStateChangeException {
     }
 
     /**
@@ -100,9 +95,6 @@ public class ListsExample
             case THUMBNAILS_LIST:
                 backStack.forward(new ThumbnailListView(this, this));
                 break;
-            case POPUP_LIST:
-                backStack.forward(new PopupListView(this, this));
-                break;
             case FANCY_LIST:
                 backStack.forward(new FancyListView(this, this));
                 break;
@@ -121,14 +113,11 @@ public class ListsExample
     public void commandAction(Command c, Displayable d) {
         if (c == List.SELECT_COMMAND) {
             showListView(list.getSelectedIndex());
-        }
-        else if (c == Commands.BACK) {
+        } else if (c == Commands.BACK) {
             backStack.back();
-        }
-        else if (c == Commands.INFORMATION) {
+        } else if (c == Commands.INFORMATION) {
             backStack.forward(new InformationView(Strings.LISTS, this));
-        }
-        else if (c == Commands.INFORMATION_BACK) {
+        } else if (c == Commands.INFORMATION_BACK) {
             backStack.back();
         }
     }
