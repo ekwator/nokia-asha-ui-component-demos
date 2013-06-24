@@ -39,13 +39,13 @@ public class StringItemView
 
         // A StringItem that acts as a button
         stringItem = new StringItem(
-            "Labeled button", "ACTION",
+            "Labeled button", "Action",
             StringItem.BUTTON);
         stringItem.addCommand(selectCommand);
         this.append(stringItem);
 
         // A button StringItem without label
-        stringItem = new StringItem("", "ACTION", StringItem.BUTTON);
+        stringItem = new StringItem("", "Action", StringItem.BUTTON);
         stringItem.setLayout(Item.LAYOUT_NEWLINE_BEFORE
             | Item.LAYOUT_NEWLINE_AFTER);
         stringItem.addCommand(selectCommand);

@@ -35,7 +35,7 @@ public class SpacerView
         // Create a Button StringItem
         StringItem stringItem = new StringItem(
             "Spacer (" + SPACER_HEIGHT +  "px) between buttons",
-            "ACTION", StringItem.BUTTON);
+            "Action", StringItem.BUTTON);
         stringItem.addCommand(selectCommand);
         this.append(stringItem);
 
@@ -44,7 +44,7 @@ public class SpacerView
         this.append(spacer);
 
         // Create another Button StringItem
-        stringItem = new StringItem("", "ACTION", StringItem.BUTTON);
+        stringItem = new StringItem("", "Action", StringItem.BUTTON);
         stringItem.addCommand(selectCommand);
         this.append(stringItem);
     }
