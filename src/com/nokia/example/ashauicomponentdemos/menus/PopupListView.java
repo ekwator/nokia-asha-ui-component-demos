@@ -1,21 +1,38 @@
+/**
+* Copyright (c) 2012-2013 Nokia Corporation. All rights reserved.
+* Nokia and Nokia Connecting People are registered trademarks of Nokia Corporation. 
+* Oracle and Java are trademarks or registered trademarks of Oracle and/or its
+* affiliates. Other product and company names mentioned herein may be trademarks
+* or trade names of their respective owners. 
+* See LICENSE.TXT for license information.
+*/
 package com.nokia.example.ashauicomponentdemos.menus;
 
 import com.nokia.example.ashauicomponentdemos.utils.Commands;
+
 import com.nokia.mid.ui.LCDUIUtil;
 import com.nokia.mid.ui.PopupList;
 import com.nokia.mid.ui.PopupListItem;
 import com.nokia.mid.ui.PopupListListener;
+
 import com.nokia.uihelpers.grid.GridItem;
 import com.nokia.uihelpers.grid.GridLayout;
+
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
 import javax.microedition.midlet.MIDlet;
 
-public class PopupListView extends Form implements CommandListener {
+/**
+ * Demonstrates PopupList component
+ */
+public class PopupListView
+        extends Form
+        implements CommandListener {
     
     private GridLayout gridLayout;
     private Command addItemCommand;
@@ -34,14 +51,18 @@ public class PopupListView extends Form implements CommandListener {
         super("Popup list");
         
         // Hide the open keyboard command in full touch devices
-        final String keyboardType = System.getProperty("com.nokia.keyboard.type");
+        final String keyboardType = System.getProperty(
+                "com.nokia.keyboard.type");
 
         if (keyboardType.equals("OnekeyBack") || keyboardType.equals("None")) {
             com.nokia.mid.ui.VirtualKeyboard.hideOpenKeypadCommand(true);
         }
 
         gridLayout = new GridLayoutWithContextMenu(getWidth());
-        LCDUIUtil.setObjectTrait(gridLayout, "nokia.ui.s40.item.direct_touch", Boolean.TRUE);
+        LCDUIUtil.setObjectTrait(
+                gridLayout,
+                "nokia.ui.s40.item.direct_touch",
+                Boolean.TRUE);
         append(gridLayout);
         
         masterCommandListener = commandListener;
@@ -82,13 +103,23 @@ public class PopupListView extends Form implements CommandListener {
         }
     }
     
+    /**
+     * Adds a new item to the grid.
+     */    
     private void addNewItem() {
         itemCounter++;
         String imageUri = "/image" + (itemCounter % 2 + 1) + ".png";
-        GridItem gridItem = new GridItem(imageUri, "Item " + itemCounter, 50, 50);
+        GridItem gridItem = new GridItem(
+                imageUri,
+                "Item " + itemCounter,
+                50,
+                50);
         gridLayout.addItem(gridItem);
     }
 
+    /**
+     * GridLayout component that displays a context menu on long-press gesture.
+     */    
     private class GridLayoutWithContextMenu extends GridLayout {
 
         private Timer timer;
@@ -98,11 +129,15 @@ public class PopupListView extends Form implements CommandListener {
             super(width);            
         }
         
+        /**
+         * Displays a context menu for the selected grid item.
+         */ 
         public void showContextMenu() {
             PopupList popupList = new PopupList();
-            PopupListItem deleteItem = new PopupListItem("Remove " + this.getSelectedItem().getString());
+            PopupListItem deleteItem = new PopupListItem(
+                    "Remove " + getSelectedItem().getString());
             popupList.setListener(new PopupListListener() {
-
+                
                 public void itemSelected(PopupList list, PopupListItem item) {
                     removeItem(getSelectedItem());
                 }
@@ -140,6 +175,7 @@ public class PopupListView extends Form implements CommandListener {
         public void pointerDragged(int x, int y) {
             super.pointerDragged(x, y);
             dragCounter++;
+            // Don't show context menu if user has dragged
             if (dragCounter > 3) {
                 if (timer != null) {
                     timer.cancel();
