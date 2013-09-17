@@ -41,8 +41,8 @@ This example application demonstrates:
 The application is hosted in GitHub:
 https://github.com/nokia-developer/nokia-asha-ui-component-demos
 
-For more information on the implementation, visit the wiki page:
-https://github.com/nokia-developer/nokia-asha-ui-component-demos/wiki
+For more information on the implementation, visit Java Developer's Library:
+http://developer.nokia.com/Resources/Library/Java/#!developers-guides/ui-graphics-and-interaction/example-asha-ui-component-demos.html
 
 
 1. Prerequisites
