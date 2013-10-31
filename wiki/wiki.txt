@@ -1,0 +1,19 @@
+[[WelcomeText()]]
+
+This project demonstrates the different UI components and patterns that can be used in Nokia Asha 501. The project is implemented as a MIDlet suite and the various examples are implemented as independent MIDlets. When you start the project, the MIDlet suite menu provided by the platform opens:
+
+[[Image(/files/screenshots/asha-ui-component-demos-1.png)]]
+
+The examples contain the following:
+
+ * [wiki:Lists Lists] demonstrates various List types.
+ * [wiki:Text Text] demonstrates !TextBox.
+ * [wiki:Dialogs Dialogs] demonstrates different kinds of Alerts.
+ * [wiki:Canvas Canvas] demonstrates different ways of presenting the Canvas.
+ * [wiki:Form Form] demonstrates different Form items.
+ * [wiki:CategoryBar CategoryBar] demonstrates the !CategoryBar with various amounts of categories.
+ * [wiki:Ticker Ticker] demonstrates the Ticker item in Displayables.
+ * [wiki:Menus Menus] demonstrates options menu and context menus.    
+The application is designed to work on Nokia Asha 501. It has been developed with Nokia Asha SDK1.0 and tested on Nokia Asha 501 device.
+
+Please see the [http://www.developer.nokia.com/Resources/Library/Asha_UI Nokia Asha Design Guidelines documentation] for more information. Check out also the [https://projects.developer.nokia.com/s40uivisualisation/wiki Series 40 UI Component Demos project].

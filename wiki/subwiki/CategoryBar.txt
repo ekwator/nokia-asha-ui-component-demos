@@ -1,0 +1,89 @@
+= Category Bar=
+The Category Bar example demonstrates the !CategoryBar component and how it behaves when it has different amounts of categories.
+
+== Design == #Design
+The MIDlet starts in a list view which allows launching the example !CategoryBar view in different configurations. A !CategoryBar can hold from one to four actions buttons, or from two to four tab selection buttons.
+
+For more information on category bars, please see the [https://www.developer.nokia.com/Resources/Library/Asha_UI/#!index.html Nokia Asha Design Guidelines].
+
+[[Image(/files/screenshots/categorybar_main_portrait.png)]]
+
+== Implementation == #Implementation
+After selecting the appropriate amount of categories in the main list view, the !CategoryBarExample (the MIDlet class) initializes and displays the !CategoryBarView with the desired amount of categories:
+
+{{{
+private void createCategoryView(int amountOfCategories, int mode) {
+    categoryBarView = new CategoryBarView(amountOfCategories, mode);
+    categoryBarView.setCommandListener(this);
+    categoryBarView.setActive(0);
+
+    categoryBar = categoryBarView.createCategoryBar(mode);
+    CategoryBarUtils.setListener(categoryBar, this);
+    categoryBar.setVisibility(true);
+
+    Display d = Display.getDisplay(this);
+    categoryBar.setHighlightColour(d.getColor(
+        Display.COLOR_HIGHLIGHTED_BACKGROUND));
+
+    // Navigate to the created view
+    backStack.forward(categoryBarView);
+}
+}}}
+
+
+The !CategoryBar is created in the !CategoryBarView:  
+
+{{{
+public CategoryBar createCategoryBar(int mode) {
+    Vector commands = new Vector();
+
+    if (amountOfCategories >= 1) {
+        Image search = ImageLoader.load(ImageLoader.CATEGORYBAR_DOWNLOADS);
+        commands.addElement(new IconCommand("downloads", search, null,
+            Command.SCREEN, 1));
+    }
+    if (amountOfCategories >= 2) {
+        // ... create a 2nd command in a similar fashion
+    }
+    if (amountOfCategories >= 3) {
+        // ... create a 3rd command in a similar fashion
+    }
+    if (amountOfCategories == 4) {
+        // ... create a 4th command in a similar fashion
+    }
+
+    IconCommand[] iconCommands = new IconCommand[amountOfCategories];
+
+    for (int i = 0; i < amountOfCategories; i++) {
+        iconCommands[i] = (IconCommand) commands.elementAt(i);
+    }
+
+    return new CategoryBar(iconCommands, true, mode);
+}
+}}}
+
+|| [[Image(/files/screenshots/categorybar_4tabs_portrait.png)]] [[Image(/files/screenshots/categorybar_4tabs_landscape.png)]]
+|| [[Image(/files/screenshots/categorybar_4actions_portrait_tap.png)]] [[Image(/files/screenshots/categorybar_4actions_portrait.png)]]
+|| [[Image(/files/screenshots/categorybar_2tabs_portrait.png)]] || 
+|| [[Image(/files/screenshots/categorybar_2actions_portrait.png)]] ||
+
+!CategoryBar sends events to a listening !ElementListener. In this example, the main MIDlet implements !ElementListener and listens to category changes in the !CategoryBar:
+
+{{{
+public void notifyElementSelected(CategoryBar categoryBar, int selectedIndex) {
+    switch (selectedIndex) {
+        case ElementListener.BACK:
+            categoryBar.setVisibility(false);
+            backStack.back();
+            break;
+        default:
+            categoryBarView.setActive(selectedIndex);
+            if (categoryBar.getMode() == CategoryBar.ELEMENT_MODE_RELEASE_SELECTED) {
+                String triggered = "\n\n" + CategoryBarView.VIEW_NAMES[selectedIndex] + " was triggered";
+                StringItem item = new StringItem("", triggered);
+                categoryBarView.append(item);
+            }
+            break;
+    }
+}
+}}}

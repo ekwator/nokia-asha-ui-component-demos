@@ -1,0 +1,25 @@
+= Ticker =
+The Ticker example demonstrates how to use the ticker class with lists, forms, and canvases.
+
+== Design == #Design
+The MIDlet starts in the "ticker - list" view demonstrating the ticker text running above a List. The other three examples can be reached from the category bar that is visible throughout the demo. The ticker appears as part of the chrome, and does not scroll away with the content.
+
+For more information on tickers, please see the [https://www.developer.nokia.com/Resources/Library/Asha_UI/#!index.html Nokia Asha Design Guidelines].
+
+|| [[Image(/files/screenshots/ticker_list_portrait.png)]] [[Image(/files/screenshots/ticker_list_landscape.png)]] ||
+|| [[Image(/files/screenshots/ticker_canvas_portrait.png)]] [[Image(/files/screenshots/ticker_canvas_landscape.png)]] ||
+|| [[Image(/files/screenshots/ticker_text_portrait.png)]] [[Image(/files/screenshots/ticker_text_landscape.png)]] ||
+|| [[Image(/files/screenshots/ticker_form_portrait.png)]] [[Image(/files/screenshots/ticker_form_landscape.png)]] ||
+== Implementation == #Implementation
+Using the ticker is fairly easy. All Displayable objects can show a ticker. To initialize a Ticker:
+
+{{{
+Ticker ticker = new Ticker("ticker text just ticking by...");
+}}}
+
+
+Then it is just a matter of setting the Ticker to the desired Displayable (for example, Canvas, Form, List): 
+
+{{{
+this.setTicker(ticker);
+}}}

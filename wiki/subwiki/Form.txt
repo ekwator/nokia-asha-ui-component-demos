@@ -1,0 +1,390 @@
+= Form=
+The Form example demonstrates the different Form components in LCDUI.
+
+== Design == #Design
+The MIDlet starts in a list view listing different Form component examples. By tapping on an example, the example view is loaded and displayed. The examples demonstrate:
+
+ * Progress + slider: Demonstrates the usage of the Gauge class.
+ * Exclusive popup: Demonstrates the usage of the !ChoiceGroup class as exclusive popups.
+ * Time & Date: Demonstrates the usage of the !DateField class.
+ * Text input: Demonstrates the usage of the !TextField class.
+ * Exclusive select: Demonstrates the usage of the !ChoiceGroup class as exclusive groups.
+ * Multiple select: Demonstrates the usage of the !ChoiceGroup class as multi-select components.
+ * Text string: Demonstrates the usage and different appearances of the !StringItem class.
+ * Image: Demonstrates the usage of the Image class.
+ * Spacer: Demonstrates the usage of the Spacer class.
+ * Custom: Demonstrates the usage of a class inherited from the !CustomItem class. 
+
+For more information on forms, please see the [https://www.developer.nokia.com/Resources/Library/Asha_UI/#!index.html Nokia Asha Design Guidelines].
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_main_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_main_landscape.png)]] ||
+
+== Implementation == #Implementation
+All example views are inherited from !FormExampleView, which is inherited from Form. !FormExampleView adds common commands to the view and provides two abstract methods used for storing and reverting to different form element values:
+
+{{{
+protected abstract void storeCurrentValues();
+protected abstract void cancelChanges();
+}}}
+
+The !FormExampleView provides the Back and OK commands. The main MIDlet lazily initializes the child views and stores them in instance variables and sets itself to listen to the commands from the child views.
+
+=== !ProgressSliderView ===
+
+The !ProgressSliderView demonstrates the use of Gauges in different ways: determinate, indeterminate, and slider. The determinate Gauge is operated by a Timer to simulate the progress:
+
+{{{
+// Up the determinate indicator's value once a second,
+// looping from 0 to max
+Timer timer = new Timer();
+timer.schedule(new TimerTask() {
+
+    public void run() {
+        if (determinateGauge.getValue() == determinateGauge.getMaxValue()) {
+            determinateGauge.setValue(0);
+        }
+        else {
+            determinateGauge.setValue(determinateGauge.getValue() + 1);
+        }
+    }
+}, 0, 1000);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_progressandslider_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_progressandslider_landscape.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_progressandslider2_landscape.png)]]||
+
+=== !ExclusivePopupView ===
+
+The !ExclusivePopupView demonstrates the !ChoiceGroup as a popup !ChoiceGroup. To have the !ChoiceGroup appear as a popup, it needs to be initialized as Choice.POPUP:
+
+{{{
+choiceGroup1 = new ChoiceGroup("popup choicegroup", Choice.POPUP);
+}}}
+Then adding items to it and appending it to the Form as usual:
+
+{{{
+for (int i = 1; i <= ITEM_COUNT; i++) {
+    choiceGroup1.append("choice item " + String.valueOf(i), null);
+}
+this.append(choiceGroup1);
+}}}
+
+To get and set the value of a !ChoiceGroup, use the get/setSelectedIndex methods:
+
+{{{
+choiceGroup1Value = choiceGroup1.getSelectedIndex();
+choiceGroup1.setSelectedIndex(choiceGroup1Value, true)
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_exclusivepopup_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_exclusivepopup_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_exclusivepopup_choice_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_exclusivepopup_choice_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_exclusivepopup_choice2_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_exclusivepopup_choice2_landscape.png)]] ||
+
+=== !TumblerView ===
+
+The pickers for time and date are !DateFields. Using !DateField is straightforward: it can be used to set either time, date, or both:
+
+{{{
+dateField = new DateField("time field", DateField.TIME);
+timeField = new DateField("date field", DateField.DATE);
+dateTimeField = new DateField("date time field", DateField.DATE_TIME);
+}}}
+
+To get or set the date in !DateField, use the get/setDate methods:
+
+{{{
+date = dateField.getDate();
+dateField.setDate(date);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_timeanddate_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_timeanddate_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_timeanddate_edittime_portrait.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_timeanddate_editdate_portrait.png)]] ||
+
+=== !TextInputView ===
+
+The !TextInputView simply demonstrates the use of the !TextField component. The !TextField can be initialized to contain a certain String, the amount of characters it accepts can (and must) be set, and it can take input constraints to have it accept only certain kind of input:
+
+{{{
+textField = new TextField("text field", // label
+                          DEFAULT_TEXT, // text
+                          256, // max length
+                          TextField.ANY); // input constraints
+}}}
+
+The contents of the !TextField can be get/set using the get/setString:
+
+{{{
+textFieldText = textField.getString();
+textField.setString(textFieldText);
+}}}
+
+The virtual keyboard type can be set by adjusting the constraints of the !TextField. The typically needed constraints are as follows:
+
+ * ANY for the regular keyboard, accepts all text.
+ * DECIMAL for decimal numbers.
+ * EMAILADDR for email addresses.
+ * PASSWORD for entering passwords (regular keyboard, but input is masked).
+ * PHONENUMBER for entering phone numbers.
+ * URL for entering URLs. 
+
+More can be found in the Javadoc documentation of the !TextField class
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_textinput_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_textinput_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_textinput_numeric_portrait.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_textinput_email_portrait.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_textinput_password_portrait.png)]] ||
+
+=== !ExclusiveSelectView ===
+
+The !ExclusiveSelectView demonstrates the !ChoiceGroup as an exclusive !ChoiceGroup. To have the !ChoiceGroup appear as exclusive, it needs to be initialized as Choice.EXCLUSIVE:
+
+{{{
+choiceGroup = new ChoiceGroup("exclusive choice group", Choice.EXCLUSIVE);
+}}}
+
+Then adding items to it and appending it to the Form as usual:
+
+{{{
+for (int i = 1; i <= ITEM_COUNT; i++) {
+    choiceGroup.append("choice item " + String.valueOf(i), null);
+}
+this.append(choiceGroup);
+}}}
+
+To get and set the value in a !ChoiceGroup, use the get/setSelectedIndex methods:
+
+{{{
+choiceGroupValue = choiceGroup.getSelectedIndex();
+choiceGroup.setSelectedIndex(choiceGroupValue, true);
+}}}
+
+If the header of the component is unnecessary, it can be omitted by setting the title property to null when initializing the component:
+
+{{{
+choiceGroup1 = new ChoiceGroup(null, Choice.EXCLUSIVE);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_exclusiveselect_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_exclusiveselect_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_exclusiveselect2_portrait.png)]] ||
+
+=== !MultiSelectView ===
+
+The !MultiSelectView demonstrates the !ChoiceGroup as a multiple !ChoiceGroup. To have the !ChoiceGroup appear as multiple, it needs to be initialised as Choice.MULTIPLE:
+
+{{{
+choiceGroup1 = new ChoiceGroup(LABEL, Choice.MULTIPLE);
+}}}
+
+Then adding items to it and appending it to the Form as usual:
+
+{{{
+for (int i = 1; i <= ITEM_COUNT; i++) {
+    choiceGroup1.append(ITEM + String.valueOf(i), null);
+}
+this.append(choiceGroup1);
+}}}
+
+To get and set the value of a !ChoiceGroup, use the get/setSelectedFlags methods:
+
+{{{
+private boolean[] choiceGroup1Values = new boolean[ITEM_COUNT];
+choiceGroup1.getSelectedFlags(choiceGroup1Values);
+choiceGroup1.setSelectedFlags(choiceGroup1Values);
+}}}
+
+If the header of the component is unnecessary, it can be omitted by setting the title property to null when initializing the component:
+
+{{{
+choiceGroup1 = new ChoiceGroup(null, Choice.MULTIPLE);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_multipleselect_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_multipleselect_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_multipleselect2_portrait.png)]] ||
+
+=== !StringItemView ===
+
+The !StringItemView class demonstrates the many faces of the !StringItem class. The !StringItem can appear as just a text element with a title:
+
+{{{
+StringItem stringItem = new StringItem("text with title",
+        "lorem ipsum dolor sit amet, consectetur adlipisicing elit, "
+        + "sed to eiusmod tempor");
+this.append(stringItem);
+}}}
+
+However, if it is initialized as a !StringItem.BUTTON and it has one or more commands added to it, it appears as a button:
+
+{{{
+stringItem = new StringItem("labeled button", "Action", StringItem.BUTTON);
+stringItem.addCommand(fooCommand);
+this.append(stringItem);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_textstring_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_textstring_landscape.png)]] ||
+
+!StringItem can also appear as a hyperlink (!StringItem.HYPERLINK):
+
+{{{
+stringItem = new StringItem("labeled hyperlink", "hyperlink", StringItem.HYPERLINK);
+stringItem.addCommand(fooCommand);
+this.append(stringItem);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_textstring2_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_textstring2_landscape.png)]] ||
+
+=== !ImageView ===
+
+The !ImageView demonstrates the !ImageItem class. In order to use an !ImageItem, an Image instance is required. So to load the image (in !ImageLoader class):
+
+{{{
+public static Image load(String file) {
+    Image image = null;
+    try {
+        image = Image.createImage(file);
+    }
+    catch (NullPointerException npe) {
+        System.out.println("No image file name specified");
+    }
+    catch (IOException ioe) {
+        System.out.println("Image not found or invalid: " + file);
+    }
+    return image;
+}
+}}}
+
+...and with the image, the !ImageItem can be initialized. It is also centered by setting the layout with setLayout to Item.LAYOUT_EXPAND | Item.LAYOUT_CENTER:
+
+{{{
+// Load the image
+Image image = ImageLoader.load(ImageLoader.PICTURE);
+
+// If the image was loaded successfully, create and show the ImageItem
+if (image != null) {
+    ImageItem imageItem = new ImageItem(null, image, Item.LAYOUT_DEFAULT,
+                                        "Test image");
+    // Center the image
+    imageItem.setLayout(Item.LAYOUT_EXPAND | Item.LAYOUT_CENTER);
+    this.append(imageItem);
+}
+}}}
+
+See the [http://www.developer.nokia.com/Community/Wiki/index.php?title=Webinar_Series_40_UI_Design Webinar for Series 40 UI Design]? for more information about !ImageItem cropping in landscape orientation.
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_image_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_image_landscape.png)]] ||
+
+=== !SpacerView ===
+
+The Spacer class can be used to make space between the Form elements. To initialize, it requires the desired width and height:
+
+{{{
+Spacer spacer = new Spacer(this.getWidth(), SPACER_HEIGHT);
+this.append(spacer);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_spacer_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_spacer_landscape.png)]] ||
+
+=== !CustomView ===
+
+|| [[Image(/files/screenshots/auicd_1.0.0_form_custom_portrait.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_form_custom2_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_form_custom2_landscape.png)]] ||
+
+The !CustomView demonstrates various uses of the !CustomItem class. !CustomItem is abstract, and the example item classes is inherited from it. The included examples are a custom slider and a switch.
+
+To allow the !CustomItems to be accessed and used without activating them first (e.g., first tap a button to activate the !CustomItem and then tap the button to actually use it), a custom trait has to be applied to them. This can be done with the LCDUIUtil class, which is nicely wrapped in the Compatibility class found in com.nokia.uihelpers package.
+
+{{{
+public static boolean setObjectTrait(Object target, String trait, Object value) {
+    try {
+        Class.forName("com.nokia.mid.ui.LCDUIUtil"); //Try to produce the exception
+
+        return LCDUIUtil.setObjectTrait(target, trait, value);
+    }
+    catch (Exception e) {
+        return false;
+    }
+}
+}}}
+
+This method can then be used on the desired !CustomItems:
+
+{{{
+Compatibility.setObjectTrait(myCustomItem, "nokia.ui.s40.item.direct_touch", Boolean.TRUE);
+}}}
+
+This has also a nice effect for !CustomItems that are used by touching and dragging, like the Slider example: after a touch and drag is started, the drag gets locked in one direction (horizontal or vertical), thus making the adjustment of the Slider a lot easier when the vertical movement does not affect the Slider.
+
+==== Slider ====
+
+The slider item is a small upgrade to the LCDUI Gauge class. The slider allows setting the minimum and maximum values for it and presents itself in a slightly different way.
+
+The slider provides an API quite similar to the LCDUI Gauge class. It has the following public methods:
+
+{{{
+// The constructor
+public Slider(int min, int max, String title, Displayable parent);
+
+// Returns the minimum value
+public int getMinValue();
+
+// Returns the maximum value
+public int getMaxValue();
+
+// Returns the current value
+public int getValue();
+
+// Sets the minimum value
+public void setMinValue(int min);
+
+// Sets the maximum value
+public void setMaxValue(int max);
+
+// Sets the current value
+public void setValue(int newValue);
+
+// Adds a SliderListener
+public void addListener(SliderListener listener);
+}}}
+
+The Slider can then be used as a form item:
+
+{{{
+Slider slider = new Slider(1, 30, "Slider", this);
+slider.addListener(this);
+this.append(slider);
+}}}
+
+==== Switch ====
+
+The Switch item is a togglable button with two states, on and off. The Switch element provides a tiny API:
+
+{{{
+// The constructor
+public Switch(String title, String activeLabel, String inactiveLabel, Displayable parent);
+
+// Returns the current value
+public boolean getValue();
+
+// Sets the current value
+public void setValue(boolean newValue);
+
+// Adds a SwitchListener
+public void addListener(SwitchListener listener);
+}}}
+
+To implement the !SwitchListener interface, one has to implement a single method that gets called whenever the Switch is interacted with:
+
+{{{
+public interface SwitchListener {
+    public void valueChanged(Switch aSwitch, boolean value);
+} 
+}}}
+
+The Switch can then be used as a form item:
+
+{{{
+Switch aSwitch = new Switch("Switch", "Value is on", "Value is off", this);
+aSwitch.addListener(this);
+this.append(aSwitch);
+}}}
+
+

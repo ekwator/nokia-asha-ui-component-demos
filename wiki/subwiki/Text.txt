@@ -1,0 +1,78 @@
+= Text =
+Demonstrates the !TextBox LCDUI component.
+
+== Design == #Design
+The MIDlet starts in a list view, listing the possible ways in which a !TextBox can be used: editable or non-editable. The example also demonstrates the text editing flow (how to lock and unlock text view contents for editing). Pressing a list item opens the demo view with the appropriate example.
+
+For more information on !TextBox, please see the [https://www.developer.nokia.com/Resources/Library/Asha_UI/#!index.html Nokia Asha Design Guidelines].
+
+[[Image(/files/screenshots/text_main_portrait.png)]]
+
+== Implementation == #Implementation
+
+The example has a class called !ExampleTextView which extends !TextBox. The main MIDlet (Text.java) presents the list view with the three options to show the text view and initializes the !ExampleTextView with the requested configuration: 
+
+{{{
+switch (list.getSelectedIndex()) {
+    default:
+    case EDITABLE_TEXT:
+        originalString = editableView.getString();
+        setCurrent(editableView);
+        break;
+    case NON_EDITABLE_TEXT:
+        setCurrent(nonEditableView);
+        break;
+    case EDIT_FLOW:
+        originalString = editFlowView.getString();
+        setCurrent(editFlowView);
+        break;
+}
+}}}
+
+In !ExampleTextView, the editability of the !TextBox is set by changing the constraints of the !TextBox using setConstraints():
+
+{{{
+public ExampleTextView(String title, boolean editable, IDisplayer displayer, CommandListener parentCommandListener) {
+    super(title, TEXT, MAX_SIZE, TextField.UNEDITABLE);
+
+    this.parentCommandListener = parentCommandListener;
+    // If the TextBox is editable, make it accept all input and 
+    // add a clear command to the options menu
+    if (editable) {
+        this.setConstraints(TextField.ANY);
+        this.addCommand(CLEAR_COMMAND);
+    }
+    this.addCommand(Commands.DONE);
+    this.addCommand(Commands.BACK);
+    this.setCommandListener(this);
+    Orientation.enableOrientations();
+}
+}}}
+
+The virtual keyboard type can be set by adjusting the constraints of the !TextBox. The typically needed constraints are as follows:
+
+ * ANY for the regular keyboard, accepts all text.
+ * DECIMAL for decimal numbers.
+ * EMAILADDR for email addresses.
+ * PASSWORD for entering passwords (regular keyboard, but input is masked).
+ * PHONENUMBER for entering phone numbers.
+ * URL for entering URLs. 
+
+More can be found in the Javadoc documentation of the !TextBox class.
+
+=== Editable text ===
+
+|| [[Image(/files/screenshots/auicd_1.0.0_text_editable_keyboard_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_text_editable_keyboard_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_text_editable_without_keyboard_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_text_editable_without_keyboard_landscape.png)]] ||
+
+=== Non-editable Text ===
+
+|| [[Image(/files/screenshots/auicd_1.0.0_text_noneditable_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_text_noneditable_landscape.png)]] || 
+
+=== Edit flow ===
+
+The Edit flow example demonstrates a text editing flow: first the user is presented with non-editable text. The user can unlock the text for editing by selecting Edit option. After editing the text, the user can confirm the changes by pressing Done.
+
+[[Image(/files/screenshots/auicd_1.0.0_text_editflow_editcommand_portrait.png)]]
+
+[[Image(/files/screenshots/auicd_1.0.0_text_editflow_keyboard_portrait.png)]]

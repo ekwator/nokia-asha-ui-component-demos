@@ -1,0 +1,115 @@
+= Dialogs =
+The Dialogs example demonstrates different kind of Alert types supported by LCDUI.
+
+== Design == #Design
+This example demonstrates various types of dialog and should cover most possibilities for the use of dialogs and alerts:
+
+ * Timed dialog; disappears after a timeout – in our example 3 seconds – and the user returns to the parent view.
+ * Text + 1 button.
+ * Text + 1 button + image.
+ * Text + 1 button + image + determinate progress indicator.
+ * Text + 1 button + image + indeterminate progress indicator.
+ * Text + 2 buttons.
+ * Text + 3 buttons + image + indeterminate progress indicator. 
+ * Alert (alarm).
+ * Alert (confirmation).
+ * Alert (error).
+ * Alert (info).
+ * Alert (warning).
+
+Determinate progress indicators should be used if the process duration is predictable or if it takes longer than 10 seconds. Indeterminate progress indicators should only be used if the process length is not predictable, but definitely less than 10 seconds. If there is only one button, it confirms the note, e.g. an information dialog. If there are two buttons, the upper one is for positive (OK) and the lower is for negative (CANCEL) actions. If there are three buttons, the topmost is for positive actions, the middle is for help or options, and the lowest is for negative (CANCEL) actions.
+
+For more information on Dialogs, please see the [https://www.developer.nokia.com/Resources/Library/Asha_UI/#!index.html Nokia Asha Design Guidelines].
+
+The MIDlet starts in a list view listing various Dialog and Alert styles supported by LCDUI.
+
+[[Image(/files/screenshots/dialogs_main_portrait.png)]]
+
+== Implementation == #Implementation
+Whenever a list item is tapped, displayDialog(int) or displayForm(int) is called with the appropriate list item index. Based on the index, an Alert is created and displayed. An Alert can have a title and some body text. The text is set with the setString(String) and setTitle(String) methods:
+
+{{{
+alert.setTitle("My title");
+alert.setString("Here is the body text for the alert");
+}}}
+
+If a determinate alert is wanted (for example, a download indicator), the progress of the Gauge must be custom handled. The value of the Gauge can be simply set with the setValue(int) method of the Gauge: 
+
+{{{
+gauge.setValue(gauge.getValue() + 1);
+}}}
+
+|| [[Image(/files/screenshots/dialogs_textbtnimgprogbar_portrait.png)]] [[Image(/files/screenshots/dialogs_textbtnimgprogbar_landscape.png)]] ||
+
+An Alert can also have a custom image. It can be set with the setImage method of the Alert:
+
+{{{
+Image infoImage = ImageLoader.load(ImageLoader.INFO);
+...
+alert.setImage(infoImage);
+}}}
+
+=== Timed Dialog ===
+
+An alert can be configured to automatically disappear after a set time. This is demonstrated in the Timed example. The timeout can be set like this:
+
+{{{
+alert.setTimeout(3000);
+}}}
+
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_timed_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_timed_landscape.png)]] ||
+
+If no automatic timeout is wanted, it can be disabled by setting the timeout time to infinity like this:
+
+{{{
+alert.setTimeout(Alert.FOREVER);
+}}}
+
+=== Determinate progress bar ===
+The progressing of the determinate progress bar is on the developer's responsibility. In this example, the progress is handled by a Timer:
+
+{{{
+gauge = new Gauge(null, false, 10, 0);
+alert.setIndicator(gauge);
+alert.setImage(downloadImage);
+timer = new Timer();
+// A timer handles the gauge
+timer.schedule(new TimerTask() {
+
+    public void run() {
+        if (gauge.getValue() == gauge.getMaxValue()) {
+            backStack.back();
+            this.cancel();
+        }
+        else {
+            gauge.setValue(gauge.getValue() + 1);
+        }
+    }
+}, 0, 1000);
+alert.addCommand(Commands.ALERT_CANCEL);
+alert.setType(AlertType.INFO);
+}}}
+
+=== Buttons ===
+
+A variable amount of buttons can be added to Alerts. One Command is represented as one button on the Alert. Depending on the number of the buttons attached, the Alert displays the buttons in different ways:
+
+'''One Command:'''
+
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_text1button_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_text1button_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_text1buttonimage_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_text1buttonimage_landscape.png)]] ||
+
+'''Two Commands:'''
+|| [[Image(/files/screenshots/dialogs_text2buttons_portrait.png)]] [[Image(/files/screenshots/dialogs_text2buttons_landscape.png)]] ||
+
+'''Three Commands:'''
+|| [[Image(/files/screenshots/dialogs_txt3btnsimgwaitbar_portrait.png)]] [[Image(/files/screenshots/dialogs_txt3btnsimgwaitbar_landscape.png)]]||
+
+== Alert types ==
+
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertalarm_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertalarm_landscape.png)]]||
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertconfirmation_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertconfirmation_landscape.png)]]||
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_alerterror_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_alerterror_landscape.png)]] ||
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertinfo_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertinfo_landscape.png)]]||
+|| [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertwarning_portrait.png)]] [[Image(/files/screenshots/auicd_1.0.0_dialogs_alertwarning_landscape.png)]]||
+
