@@ -1,7 +1,0 @@
-The example is ported from [https://projects.developer.nokia.com/s40uivisualisation Series 40 UI Component Demos] to Nokia Asha software platform 1.0. See [wiki:WikiStart the wiki] for the design and implementation notes.
-
-[[Image(/files/screenshots/asha-ui-component-demos-1.png, 200px)]] [[Image(/files/screenshots/asha-ui-component-demos-2.png, 200px)]] [[Image(/files/screenshots/asha-ui-component-demos-6.png, 200px)]]
-
-== Compatibility ==
-
-Nokia Asha software platform 1.0. Tested on Nokia Asha 501. Developed with Nokia Asha SDK 1.0.
